@@ -45,18 +45,20 @@ static NSTimeInterval const kTransitionDuration = .3f;
 {
     kTRVSCurrentLayer = [self _layerSnapshotWithTransform:CATransform3DIdentity];
     
-    [self pushViewController:viewController animated:NO];
+    // [self pushViewController:viewController animated:NO];
     
     kTRVSNextLayer = [self _layerSnapshotWithTransform:CATransform3DIdentity];
     kTRVSNextLayer.frame = (CGRect){{CGRectGetWidth(self.view.bounds), CGRectGetMinY(self.view.bounds)}, self.view.bounds.size};
     
     [self.view.layer addSublayer:kTRVSCurrentLayer];
-    [self.view.layer addSublayer:kTRVSNextLayer];
+    // [self.view.layer addSublayer:kTRVSNextLayer];
     
     [CATransaction flush];
     
+    [self pushViewController:viewController animated:YES];
+    
     [kTRVSCurrentLayer addAnimation:[self _animationWithTranslation:-CGRectGetWidth(self.view.bounds)] forKey:nil];
-    [kTRVSNextLayer addAnimation:[self _animationWithTranslation:-CGRectGetWidth(self.view.bounds)] forKey:nil];
+    // [kTRVSNextLayer addAnimation:[self _animationWithTranslation:-CGRectGetWidth(self.view.bounds)] forKey:nil];
 }
 
 - (void)popViewControllerWithNavigationControllerTransition
